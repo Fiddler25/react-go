@@ -1,4 +1,4 @@
-module github.com/Fiddler25/react-go
+module react-go/backend
 
 go 1.15
 
