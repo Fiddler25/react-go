@@ -1,12 +1,9 @@
 package main
 
-import "fmt"
-
-func GetHello(s string) string {
-	return "Hello " + s + "!"
-}
+import (
+	"github.com/Fiddler25/react-go/backend/infra/router"
+)
 
 func main() {
-	s := GetHello("World")
-	fmt.Println(s)
+	router.Init()
 }
