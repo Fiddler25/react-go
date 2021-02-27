@@ -6,8 +6,8 @@ import (
 	"golang.org/x/crypto/bcrypt"
 	"io/ioutil"
 	"log"
-	"react-go/backend/config/db"
 	"react-go/backend/models"
+	"react-go/backend/services/users"
 )
 
 func Signup(c *gin.Context) {
@@ -28,16 +28,5 @@ func Signup(c *gin.Context) {
 		log.Fatal(err)
 	}
 
-	createUser(user.ID, user.Email, string(encryptedPassword))
-}
-
-func createUser(id int, email string, password string) {
-	db := db.DBConnector()
-	defer db.Close()
-
-	sql, err := db.Prepare("INSERT INTO users(ID, Email, Password) VALUES (?, ?, ?)")
-	if err != nil {
-		log.Fatal(err)
-	}
-	sql.Exec(id, email, password)
+	users.CreateUser(user.ID, user.Email, string(encryptedPassword))
 }
