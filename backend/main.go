@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/Fiddler25/react-go/backend/infra/router"
+	"react-go/backend/config/router"
 )
 
 func main() {
