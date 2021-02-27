@@ -1,7 +1,7 @@
 package main
 
 import (
-	"react-go/backend/infra/router"
+	"react-go/backend/router"
 )
 
 func main() {
