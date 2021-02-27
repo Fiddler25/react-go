@@ -28,16 +28,16 @@ func Signup(c *gin.Context) {
 		log.Fatal(err)
 	}
 
-	createUser(user.ID, user.UserID, string(encryptedPassword))
+	createUser(user.ID, user.Email, string(encryptedPassword))
 }
 
-func createUser(id int, userID string, password string) {
+func createUser(id int, email string, password string) {
 	db := db.DBConnector()
 	defer db.Close()
 
-	sql, err := db.Prepare("INSERT INTO users(ID, UserID, Password) VALUES (?, ?, ?)")
+	sql, err := db.Prepare("INSERT INTO users(ID, Email, Password) VALUES (?, ?, ?)")
 	if err != nil {
 		log.Fatal(err)
 	}
-	sql.Exec(id, userID, password)
+	sql.Exec(id, email, password)
 }
