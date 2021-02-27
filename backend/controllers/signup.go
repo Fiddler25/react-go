@@ -3,6 +3,7 @@ package controllers
 import (
 	"encoding/json"
 	"github.com/gin-gonic/gin"
+	"golang.org/x/crypto/bcrypt"
 	"io/ioutil"
 	"log"
 	"react-go/backend/config/db"
@@ -22,7 +23,12 @@ func Signup(c *gin.Context) {
 		log.Fatal(err)
 	}
 
-	createUser(user.ID, user.UserID, user.Password)
+	encryptedPassword, err := bcrypt.GenerateFromPassword([]byte(user.Password), bcrypt.DefaultCost)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	createUser(user.ID, user.UserID, string(encryptedPassword))
 }
 
 func createUser(id int, userID string, password string) {
