@@ -2,7 +2,7 @@ package router
 
 import (
 	"github.com/gin-gonic/gin"
-	"react-go/backend/controllers"
+	"react-go/backend/controllers/sessions"
 )
 
 func Init() {
@@ -17,7 +17,7 @@ func endpoints(r *gin.Engine) {
 	{
 		v1api := api.Group("/v1")
 		{
-			v1api.POST("/signup", controllers.Signup)
+			v1api.POST("/signup", sessions.Signup)
 		}
 	}
 }

@@ -1,4 +1,4 @@
-package controllers
+package sessions
 
 import (
 	"encoding/json"
