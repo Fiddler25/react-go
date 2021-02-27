@@ -6,28 +6,7 @@ import (
 	"github.com/joho/godotenv"
 	"log"
 	"os"
-	"react-go/backend/models"
 )
-
-func Init() {
-	db := DBConnector()
-	defer db.Close()
-
-	query, err := db.Query("SELECT * FROM users")
-	defer query.Close()
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	for query.Next() {
-		var user models.User
-		err := query.Scan(&user.ID, &user.UserID, &user.Password)
-
-		if err != nil {
-			log.Fatal(err)
-		}
-	}
-}
 
 func DBConnector() *sql.DB {
 	err := godotenv.Load()
