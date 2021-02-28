@@ -4,7 +4,7 @@ import (
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-contrib/sessions/cookie"
 	"github.com/gin-gonic/gin"
-	"react-go/backend/controllers/sessions"
+	"react-go/backend/controllers/auth"
 )
 
 func Init() {
@@ -23,7 +23,8 @@ func endpoints(r *gin.Engine) {
 	{
 		v1api := api.Group("/v1")
 		{
-			v1api.POST("/signup", sessions.Signup)
+			v1api.POST("/signup", auth.Signup)
+			v1api.POST("/login", auth.Login)
 		}
 	}
 }

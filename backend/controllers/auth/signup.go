@@ -1,4 +1,4 @@
-package sessions
+package auth
 
 import (
 	"encoding/json"
@@ -28,5 +28,5 @@ func Signup(c *gin.Context) {
 		log.Fatal(err)
 	}
 
-	users.CreateUser(user.ID, user.Email, string(encryptedPassword))
+	users.CreateUser(user.Email, string(encryptedPassword))
 }
