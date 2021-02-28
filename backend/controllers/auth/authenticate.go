@@ -17,3 +17,10 @@ func Signup(c *gin.Context) {
 
 	users.CreateUser(user.Email, string(encryptedPassword))
 }
+
+func Login(c *gin.Context) {
+	user := users.RequestHandler(c)
+	result := users.LoggedIn(c, user)
+
+	c.JSON(200, gin.H{"result": result})
+}
