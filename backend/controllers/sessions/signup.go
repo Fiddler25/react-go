@@ -20,5 +20,6 @@ func Signup(c *gin.Context) {
 		log.Println(err)
 	}
 
-	users.CreateUser(user.Email, string(encryptedPassword))
+	res := users.CreateUser(user.Email, string(encryptedPassword))
+	c.JSON(200, gin.H{"result": res})
 }
