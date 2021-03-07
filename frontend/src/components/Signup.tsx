@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
 
 interface SignupProps {
   email: string;
@@ -31,7 +33,11 @@ export default class Signup extends Component<SignupProps> {
             <tr>
               <th>メールアドレス</th>
               <td>
-                <input
+                <TextField
+                  label="email"
+                  margin="dense"
+                  required
+                  size="small"
                   type="email"
                   value={email}
                   onChange={this.handleChangeEmail}
@@ -41,9 +47,14 @@ export default class Signup extends Component<SignupProps> {
             <tr>
               <th>パスワード</th>
               <td>
-                <input
+                <TextField
+                  autoComplete="current-password"
+                  inputProps={{ minLength: 8 }}
+                  label="password"
+                  margin="dense"
+                  required
+                  size="small"
                   type="password"
-                  minLength={8}
                   value={password}
                   onChange={this.handleChangePassword}
                 />
@@ -51,7 +62,9 @@ export default class Signup extends Component<SignupProps> {
             </tr>
           </tbody>
         </table>
-        <button onClick={this.onSignup}>登録</button>
+        <Button color="inherit" variant="outlined" onClick={this.onSignup}>
+          登録
+        </Button>
       </div>
     );
   }
