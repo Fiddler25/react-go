@@ -1,7 +1,9 @@
 import React, { Component } from "react";
+import Home from "./components/Home";
 import Signup from "./components/Signup";
 
 interface AppState {
+  signedUp: boolean;
   email: string;
   password: string;
 }
@@ -10,6 +12,7 @@ export default class App extends Component<{}, AppState> {
   constructor(props: {}) {
     super(props);
     this.state = {
+      signedUp: false,
       email: "",
       password: "",
     };
@@ -25,7 +28,7 @@ export default class App extends Component<{}, AppState> {
       body: JSON.stringify({ email, password }),
     };
     const { result } = await fetch(endpoint, options).then((res) => res.json());
-    console.log(result);
+    this.setState({ signedUp: result });
   };
 
   handleChangeEmail = (email: string) => {
@@ -48,13 +51,17 @@ export default class App extends Component<{}, AppState> {
           alignItems: "center",
         }}
       >
-        <Signup
-          onSignup={this.onSignup}
-          onChangeEmail={this.handleChangeEmail}
-          onChangePassword={this.handleChangePassword}
-          email={email}
-          password={password}
-        />
+        {this.state.signedUp ? (
+          <Home />
+        ) : (
+          <Signup
+            onSignup={this.onSignup}
+            onChangeEmail={this.handleChangeEmail}
+            onChangePassword={this.handleChangePassword}
+            email={email}
+            password={password}
+          />
+        )}
       </div>
     );
   }
