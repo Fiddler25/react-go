@@ -1,12 +1,18 @@
 package router
 
 import (
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"react-go/backend/controllers/sessions"
 )
 
 func Init() {
 	router := gin.Default()
+
+	config := cors.DefaultConfig()
+	config.AllowOrigins = []string{"http://localhost:4000"}
+	router.Use(cors.New(config))
+
 	endpoints(router)
 
 	router.Run(":3000")
