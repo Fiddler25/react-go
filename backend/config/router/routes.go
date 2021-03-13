@@ -24,6 +24,7 @@ func endpoints(r *gin.Engine) {
 		v1api := api.Group("/v1")
 		{
 			v1api.POST("/signup", sessions.Signup)
+			v1api.POST("/login", sessions.Login)
 		}
 	}
 }
