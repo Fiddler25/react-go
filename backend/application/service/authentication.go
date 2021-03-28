@@ -3,7 +3,7 @@ package service
 import (
 	"context"
 	"log"
-	"react-go/backend/config/db"
+	"react-go/backend/infra/db"
 	"react-go/backend/domain/model"
 	"react-go/backend/domain/repository"
 )
