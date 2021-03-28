@@ -3,7 +3,7 @@ package router
 import (
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
-	"react-go/backend/controllers/sessions"
+	"react-go/backend/interface/controller/authentication"
 )
 
 func Init() {
@@ -23,7 +23,7 @@ func endpoints(r *gin.Engine) {
 	{
 		v1api := api.Group("/v1")
 		{
-			v1api.POST("/signup", sessions.Signup)
+			v1api.POST("/signup", authentication.SignUp)
 		}
 	}
 }
