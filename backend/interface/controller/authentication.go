@@ -22,5 +22,6 @@ func SignUp(c *gin.Context) {
 		log.Println(err)
 	}
 
-	c.JSON(http.StatusOK, user)
+	uDTO := translateFromUserToUserDTO(user)
+	c.JSON(http.StatusOK, uDTO)
 }
