@@ -4,24 +4,43 @@ import (
 	"github.com/gin-gonic/gin"
 	"log"
 	"net/http"
-	"react-go/backend/application/service"
+	"react-go/backend/application"
 	"react-go/backend/domain/model"
 )
 
-func SignUp(c *gin.Context) {
+type AuthenticationController interface {
+	InitAuthenticationAPI(g *gin.RouterGroup)
+	SignUp(g *gin.Context)
+}
+
+type authenticationController struct {
+	aApp application.AuthenticationService
+}
+
+func NewAuthenticationController(uAPP application.AuthenticationService) AuthenticationController {
+	return &authenticationController{
+		aApp: uAPP,
+	}
+}
+
+func (c *authenticationController) InitAuthenticationAPI(g *gin.RouterGroup) {
+	g.POST("/signup", c.SignUp)
+}
+
+func (c *authenticationController) SignUp(g *gin.Context) {
 	params := &model.User{}
-	if err := c.BindJSON(params); err != nil {
+	if err := g.BindJSON(params); err != nil {
 		log.Println(err)
 		return
 	}
 
-	ctx := c.Request.Context()
+	ctx := g.Request.Context()
 
-	user, err := service.SignUpService(ctx, params)
+	user, err := c.aApp.SignUp(ctx, params)
 	if err != nil {
 		log.Println(err)
 	}
 
 	uDTO := translateFromUserToUserDTO(user)
-	c.JSON(http.StatusOK, uDTO)
+	g.JSON(http.StatusOK, uDTO)
 }
